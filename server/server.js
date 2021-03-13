@@ -29,4 +29,4 @@ app.use(cors())
 app.use("/api", routes)
 
 const PORT = process.env.PORT || 8000
-app.listen(PORT, () => logger.log(`Working on port htpp://localhost:${PORT}`))
+app.listen(PORT, () => logger.log(`Working on port http://localhost:${PORT}`))

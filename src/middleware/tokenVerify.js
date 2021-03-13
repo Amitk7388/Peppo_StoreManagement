@@ -1,11 +1,19 @@
-// module.exports = async (req, res) => {
-//     try {
-//         const email = await validate.emailCheck(req.body.email);
-//         const emailExtist = await UserSchema.findOne({ email: req.body.email });
-//         if (emailExtist !== null) throw "User Not Found";
-//       } catch (err) {
-//         logger.log(err);
-//         response(res, 422, err, "Failed");
-//       }
+const Security = require("../../lib/security-provider") 
+
+const response = require("../../lib/response-provider") 
+const {success, failed} = require("../enum/res")
+const Logger = require("../../lib/logger-provider")
+const logger = new Logger("middleware")
+
+module.exports = async (req, res, next) => {
+    try{
+        const security = new Security(process.env.secretkey)
+        const token = await security.jwtVerify(req.headers.authorization)
+        req.user = token
+        next()
+    }catch(err){
+        console.log(err)
+        response(res, 401, "User Not Authorized", failed)
+    }
     
-// }
+}
