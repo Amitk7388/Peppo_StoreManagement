@@ -3,7 +3,7 @@ const ProductSchema = mongoose.Schema({
     productName : {type: String},
     price: Number,
     MRP: Number,
-    Store: {type: mongoose.Schema.Types.ObjectId, ref : "store"},
+    Store: {type: mongoose.Schema.Types.ObjectId, ref : "stores"},
     photos:[ String],
     description: String,
 })
